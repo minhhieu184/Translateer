@@ -1,9 +1,11 @@
 import Fastify from "fastify";
+import cors from '@fastify/cors'
 import PagePool from "./browser/pagepool";
 
 const fastify = Fastify({ logger: true });
+fastify.register(cors, { origin: '*' });
 
-const { PAGE_COUNT = "5", PORT = "8999" } = process.env;
+const { PAGE_COUNT = "5", PORT = "3000" } = process.env;
 
 (async () => {
 	console.log("connecting to puppeteer...");
