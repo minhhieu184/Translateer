@@ -43,7 +43,9 @@ const handler = async (request: any, reply: any) => {
 
 	let response: Record<string, any>;
 	try {
+		console.log('handler ~ text:', text)
 		const res = await parsePage(page, { text, from, to, lite });
+		console.log('handler ~ res:', res.result)
 		response = {
 			result: res.result,
 			pronunciation: res.pronunciation,

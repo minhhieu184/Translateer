@@ -58,15 +58,20 @@ element.style.wordBreak = 'normal'
 element.style.zIndex = '2'
 const parent = document.querySelector('[data-testid="video-markup"]')
 parent.appendChild(element)
+
 var observables = document.querySelector('[data-testid="subtitle-text"]')
 var observer = new MutationObserver(function (mutations) {
   mutations.forEach(function (mutation) {
+    console.log(mutation.target.textContent)
     const source = `http://localhost:3000/api?text=${mutation.target.textContent}&from=en&to=vi`
-    fetch(source, { method: 'GET' })
+    fetch(source, { method: 'GET', headers: { 'Content-Type': 'application/json' } })
       .then((response) => response.json())
       .then((data) => {
         console.log(data.result)
         element.textContent = data.result
+      })
+      .catch((err) => {
+        console.log('err:', err)
       })
   })
 })

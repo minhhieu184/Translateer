@@ -118,7 +118,7 @@ export const parsePage = async (
 	do {
 		// const targetSelector = `span[data-language-for-alternatives=${to}]`;
 		const targetSelector = `span[lang=${to}]`;
-		await page.waitForSelector(targetSelector);
+		await page.waitForSelector(targetSelector, { timeout: 2000 });
 
 		// get translated text
 		result += await page.evaluate(
